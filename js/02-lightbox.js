@@ -8,11 +8,11 @@ const gallery = document.querySelector(".gallery");
 const markup = galleryItems
   .map(
     (item) =>
-      `<div class="gallery__item">
+      `<li class="gallery__item">
     <a class="gallery__item" href="${item.original}">
     <img class="gallery__image" src="${item.preview}" alt="${item.description}" />
   </a>
-  </div>`
+  </li>`
   )
   .join(" ");
 
@@ -28,6 +28,9 @@ function onImageClick(event) {
     captionsData: "alt",
     captionsPosition: "bottom",
     captionsDelay: 250,
+    overlay: true,
+    nav: true,
+    captionSelector: "img",
   });
 }
 
