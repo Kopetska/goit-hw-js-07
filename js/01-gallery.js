@@ -20,6 +20,8 @@ const newLink = galleryItems
 
 gallery.insertAdjacentHTML("afterbegin", newLink);
 
+let instance;
+
 function showModal(event) {
   event.preventDefault();
   const imageValue = event.target.dataset.source;
@@ -27,7 +29,7 @@ function showModal(event) {
     return;
   }
 
-  const instance = basicLightbox.create(`
+  instance = basicLightbox.create(`
     <div class="modal">
         <img src="${imageValue}">
     </div>
@@ -40,9 +42,8 @@ gallery.addEventListener("click", showModal);
 
 function closeModal(event) {
   if (event.code === "Escape") {
-    const instance = basicLightbox.create((gallery.innerHTML = newLink));
     instance.close();
   }
 }
 
-document.addEventListener("keydown", closeModal);
+window.addEventListener("keydown", closeModal);

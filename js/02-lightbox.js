@@ -18,20 +18,12 @@ const markup = galleryItems
 
 gallery.insertAdjacentHTML("afterbegin", markup);
 
-function onImageClick(event) {
-  if (event.target.nodeName !== "IMG") {
-    return;
-  }
-  event.preventDefault();
-  const lightbox = new SimpleLightbox(".gallery a", {
-    navText: ["<", ">"],
-    captionsData: "alt",
-    captionsPosition: "bottom",
-    captionsDelay: 250,
-    overlay: true,
-    nav: true,
-    captionSelector: "img",
-  });
-}
-
-gallery.addEventListener("click", onImageClick);
+const lightbox = new SimpleLightbox(".gallery a", {
+  navText: ["<", ">"],
+  captionsData: "alt",
+  captionsPosition: "bottom",
+  captionsDelay: 250,
+  overlay: true,
+  nav: true,
+  captionSelector: "img",
+});
