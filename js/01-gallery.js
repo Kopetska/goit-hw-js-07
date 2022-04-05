@@ -20,21 +20,26 @@ const newLink = galleryItems
 
 gallery.insertAdjacentHTML("afterbegin", newLink);
 
-let instance;
+const instance = basicLightbox.create(
+  `<img class="modal" src="">`,
+  {
+    onShow: (instance) => {
+      window.addEventListener("keydown", closeModal);
+    },
+  },
+  {
+    onClose: (instance) => {
+      window.removeEventListener("keydown", closeModal);
+    },
+  }
+);
 
 function showModal(event) {
   event.preventDefault();
-  const imageValue = event.target.dataset.source;
   if (event.target.nodeName !== "IMG") {
     return;
   }
-
-  instance = basicLightbox.create(`
-    <div class="modal">
-        <img src="${imageValue}">
-    </div>
-`);
-
+  instance.element().querySelector(".modal").src = event.target.dataset.source;
   instance.show();
 }
 
@@ -43,6 +48,7 @@ gallery.addEventListener("click", showModal);
 function closeModal(event) {
   if (event.code === "Escape") {
     instance.close();
+    return;
   }
 }
 
